@@ -1,11 +1,13 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
+import 'package:fruit_hup/core/services/shered_preferances_singelton.dart';
 import 'package:fruit_hup/features/splash/presentation/views/splash_view.dart';
 
 import 'core/helper_functions/on_generate_route.dart';
 import 'generated/l10n.dart';
 
-void main() {
+void main() async {
+  await SheredPreferancesSingelton.init();
   runApp(const FruitHup());
 }
 
