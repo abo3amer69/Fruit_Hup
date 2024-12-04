@@ -1,6 +1,7 @@
 import 'package:dots_indicator/dots_indicator.dart';
 import 'package:flutter/material.dart';
 import 'package:fruit_hup/constants.dart';
+import 'package:fruit_hup/core/services/shered_preferances_singelton.dart';
 import 'package:fruit_hup/core/utils/app_color.dart';
 import 'package:fruit_hup/core/widget/custom_buttom.dart';
 import 'package:fruit_hup/features/auth/presentation/views/login_view.dart';
@@ -64,6 +65,7 @@ class _OnBoardingViewBodyState extends State<OnBoardingViewBody> {
             ),
             child: CustomButton(
               onPressed: () {
+                prefs.setBool(KisOnBoardingViewSeen, true);
                 Navigator.of(context).pushReplacementNamed(LoginView.routeName);
               },
               text: 'ابدأ الان',

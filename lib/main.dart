@@ -7,7 +7,8 @@ import 'core/helper_functions/on_generate_route.dart';
 import 'generated/l10n.dart';
 
 void main() async {
-  await SheredPreferancesSingelton.init();
+  WidgetsFlutterBinding.ensureInitialized();
+  await prefs.init();
   runApp(const FruitHup());
 }
 
