@@ -4,6 +4,9 @@ import 'package:fruit_hup/core/utils/app_color.dart';
 import 'package:fruit_hup/core/utils/app_text_style.dart';
 import 'package:fruit_hup/core/widget/custom_buttom.dart';
 import 'package:fruit_hup/core/widget/custom_text_form_field.dart';
+import 'package:fruit_hup/features/auth/presentation/views/widget/or_divider.dart';
+
+import 'dont_have_account_widget.dart';
 
 class LoginViewBody extends StatelessWidget {
   const LoginViewBody({super.key});
@@ -55,22 +58,11 @@ class LoginViewBody extends StatelessWidget {
             const SizedBox(
               height: 33,
             ),
-            Text.rich(
-              TextSpan(
-                children: [
-                  TextSpan(
-                    text: 'لا تمتلك حساب ؟',
-                    style: TextStyles.semiBold16
-                        .copyWith(color: const Color(0xff949D9E)),
-                  ),
-                  TextSpan(
-                    text: 'قم بانشاء حساب',
-                    style: TextStyles.semiBold16
-                        .copyWith(color: AppColors.primaryColor),
-                  ),
-                ],
-              ),
+            const DontHaveAnAccountWidget(),
+            const SizedBox(
+              height: 33,
             ),
+            const OrDivider(),
           ],
         ),
       ),
