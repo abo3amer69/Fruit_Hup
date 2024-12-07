@@ -9,7 +9,7 @@ import 'package:fruit_hup/features/auth/presentation/views/signup_view.dart';
 import 'package:fruit_hup/features/auth/presentation/views/widget/have_anaccount.dart';
 import 'package:fruit_hup/features/auth/presentation/views/widget/terms_and_conditions.dart';
 
-import '../../cubits/cubit/signup_cubit.dart';
+import '../../cubits/signup_cubits/signup_cubit.dart';
 
 class SignUpViewBody extends StatefulWidget {
   const SignUpViewBody({super.key});

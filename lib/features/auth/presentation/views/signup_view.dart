@@ -3,7 +3,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:fruit_hup/core/services/git_it_services.dart';
 import 'package:fruit_hup/core/widget/custom_app_bar.dart';
 import 'package:fruit_hup/features/auth/domain/repos/auth_repo.dart';
-import 'package:fruit_hup/features/auth/presentation/cubits/cubit/signup_cubit.dart';
+import 'package:fruit_hup/features/auth/presentation/cubits/signup_cubits/signup_cubit.dart';
 import 'package:fruit_hup/features/auth/presentation/views/widget/signup_view_body.dart';
 import 'package:fruit_hup/features/auth/presentation/views/widget/signup_view_body_bloc_consumer.dart';
 
