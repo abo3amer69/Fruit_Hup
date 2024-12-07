@@ -34,4 +34,17 @@ class SigninCubit extends Cubit<SigninState> {
       ),
     );
   }
+
+  Future<void> signinwithFacebook() async {
+    emit(SigninLoading());
+    var result = await authRepo.signinWithFacebook();
+    result.fold(
+      (Failure) => emit(
+        SigninFailure(message: Failure.message),
+      ),
+      (UserEntity) => emit(
+        SigninSuccess(userEntity: UserEntity),
+      ),
+    );
+  }
 }
