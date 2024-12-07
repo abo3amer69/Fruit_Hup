@@ -7,6 +7,7 @@ import 'package:fruit_hup/features/auth/presentation/cubits/signin_cubis/signin_
 import 'package:fruit_hup/features/auth/presentation/views/widget/signin_view_body.dart';
 
 import '../../domain/repos/auth_repo.dart';
+import 'widget/signin_view_body_bloc_consumer.dart';
 
 class SignView extends StatelessWidget {
   const SignView({super.key});
@@ -21,7 +22,7 @@ class SignView extends StatelessWidget {
       ),
       child: Scaffold(
         appBar: buildAppBar(context, title: 'تسجيل دخول'),
-        body: const SigninViewBody(),
+        body: SigninViewBodyBlocConsumer(),
       ),
     );
   }
