@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:fruit_hup/constants.dart';
+import 'package:fruit_hup/core/helper_functions/build_error_bar.dart';
 import 'package:fruit_hup/core/widget/custom_buttom.dart';
 import 'package:fruit_hup/core/widget/custom_text_form_field.dart';
 import 'package:fruit_hup/core/widget/password_field.dart';
@@ -22,6 +23,7 @@ class _SignUpViewBodyState extends State<SignUpViewBody> {
   AutovalidateMode autovalidateMode = AutovalidateMode.disabled;
 
   late String email, userName, password;
+  late bool isTermsAccepted = false;
   @override
   Widget build(BuildContext context) {
     return SingleChildScrollView(
@@ -63,7 +65,11 @@ class _SignUpViewBodyState extends State<SignUpViewBody> {
               const SizedBox(
                 height: 16,
               ),
-              const TermsAndConditionsWidget(),
+              TermsAndConditionsWidget(
+                onChanged: (value) {
+                  isTermsAccepted = value;
+                },
+              ),
               const SizedBox(
                 height: 30,
               ),
@@ -71,8 +77,18 @@ class _SignUpViewBodyState extends State<SignUpViewBody> {
                 onPressed: () {
                   if (formKey.currentState!.validate()) {
                     formKey.currentState!.save();
-                    context.read<SignupCubit>().createUserWithEmailAndPassword(
-                        email, userName, password);
+                    if (isTermsAccepted) {
+                      context
+                          .read<SignupCubit>()
+                          .createUserWithEmailAndPassword(
+                            email,
+                            userName,
+                            password,
+                          );
+                    } else {
+                      buildErrorBar(
+                          context, 'يجب الموافقة على الشروط والاحكام');
+                    }
                   } else {
                     setState(() {
                       autovalidateMode = AutovalidateMode.always;
