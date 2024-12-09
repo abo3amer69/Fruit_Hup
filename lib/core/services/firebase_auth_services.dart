@@ -46,20 +46,23 @@ class FirebaseAuthServices {
       );
       return credential.user!;
     } on FirebaseAuthException catch (e) {
-      log('Exception in AuthRepoImpl.signInWithEmailAndPassword: ${e.toString()}and code: ${e.code}');
+      log("Exception in firebaseAuthServices.signInWithEmailAndPassword: ${e.toString()}and code is ${e.code}");
       if (e.code == 'user-not-found') {
         throw CustomException(
             message: 'البريد الالكتروني او الرقم السري غير صحيح');
       } else if (e.code == 'wrong-password') {
         throw CustomException(
             message: 'البريد الالكتروني او الرقم السري غير صحيح');
+      } else if (e.code == 'invalid-credential') {
+        throw CustomException(
+            message: 'احمد البريد الالكتروني او الرقم السري غير صحيح');
       } else if (e.code == 'network-request-failed') {
         throw CustomException(message: 'لا يوجد إتصال بالإنترنت');
       } else {
         throw CustomException(message: 'حدث خطأ, حاول مرة أخرى');
       }
     } catch (e) {
-      log('Exception in FirebaseAuthServices.signInWithEmailAndPassword: ${e.toString()}');
+      log("Exception in FirebaseAuthServices.signInWithEmailAndPassword: ${e.toString()}");
       throw CustomException(message: 'حدث خطأ, حاول مرة أخرى');
     }
   }
