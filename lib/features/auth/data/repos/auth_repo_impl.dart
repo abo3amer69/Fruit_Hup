@@ -4,8 +4,10 @@ import 'package:dartz/dartz.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:fruit_hup/core/error/exceptions.dart';
 import 'package:fruit_hup/core/error/failure.dart';
+import 'package:fruit_hup/core/services/database_services.dart';
 
 import 'package:fruit_hup/core/services/firebase_auth_services.dart';
+import 'package:fruit_hup/core/utils/backend_endpoint.dart';
 import 'package:fruit_hup/features/auth/data/model/user_model.dart';
 import 'package:fruit_hup/features/auth/domain/entites/user_entity.dart';
 import 'package:fruit_hup/features/auth/domain/repos/auth_repo.dart';
@@ -13,16 +15,19 @@ import 'package:fruit_hup/features/auth/domain/repos/auth_repo.dart';
 class AuthRepoImpl extends AuthRepo {
   final FirebaseAuthServices firebaseAuthServices;
 
-  AuthRepoImpl({required this.firebaseAuthServices});
+  final DatabaseServices databaseServices;
+
+  AuthRepoImpl(
+      {required this.databaseServices, required this.firebaseAuthServices});
   @override
   Future<Either<Failure, UserEntity>> createUserWithEmailAndPassword(
       String email, String password, String name) async {
     try {
       var user = await firebaseAuthServices.createUserWithEmailAndPassword(
           email: email, password: password);
-      return Right(
-        UserModel.fromFirebaseUser(user),
-      );
+      var userEntity = UserModel.fromFirebaseUser(user);
+      await addUserData(user: userEntity);
+      return Right(userEntity);
     } on CustomException catch (e) {
       return Left(
         ServerFailure(e.message),
@@ -110,5 +115,11 @@ class AuthRepoImpl extends AuthRepo {
         ),
       );
     }
+  }
+
+  @override
+  Future addUserData({required UserEntity user}) async {
+    await databaseServices.addData(
+        path: BackendEndpoint.addUserData, data: user.toMap());
   }
 }
