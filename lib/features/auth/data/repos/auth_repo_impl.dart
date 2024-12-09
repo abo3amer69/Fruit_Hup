@@ -26,16 +26,18 @@ class AuthRepoImpl extends AuthRepo {
     try {
       user = await firebaseAuthServices.createUserWithEmailAndPassword(
           email: email, password: password);
-      var userEntity = UserModel.fromFirebaseUser(user);
+      var userEntity = UserEntity(
+        name: name,
+        email: email,
+        uId: user.uid,
+      );
       await addUserData(user: userEntity);
       return Right(userEntity);
     } on CustomException catch (e) {
       if (user != null) {
         await firebaseAuthServices.deletUser();
       }
-      return Left(
-        ServerFailure(e.message),
-      );
+      return Left(ServerFailure(e.message));
     } catch (e) {
       if (user != null) {
         await firebaseAuthServices.deletUser();
