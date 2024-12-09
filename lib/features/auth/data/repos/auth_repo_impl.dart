@@ -1,6 +1,7 @@
 import 'dart:developer';
 
 import 'package:dartz/dartz.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:fruit_hup/core/error/exceptions.dart';
 import 'package:fruit_hup/core/error/failure.dart';
 
