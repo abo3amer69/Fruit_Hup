@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:fruit_hup/core/helper_functions/build_error_bar.dart';
 import 'package:fruit_hup/core/widget/custom_progress_hud.dart';
+import 'package:fruit_hup/features/home/presentation/views/home_views.dart';
 
 import '../../cubits/signin_cubis/signin_cubit.dart';
 import 'signin_view_body.dart';
@@ -15,7 +16,9 @@ class SigninViewBodyBlocConsumer extends StatelessWidget {
   Widget build(BuildContext context) {
     return BlocConsumer<SigninCubit, SigninState>(
       listener: (context, state) {
-        if (state is SigninSuccess) {}
+        if (state is SigninSuccess) {
+          Navigator.pushNamed(context, HomeView.routeName);
+        }
         if (state is SigninFailure) {
           buildErrorBar(context, state.message);
         }
