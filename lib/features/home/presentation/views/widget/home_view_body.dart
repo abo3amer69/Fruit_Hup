@@ -1,5 +1,7 @@
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
+import 'package:fruit_hup/constants.dart';
+import 'package:fruit_hup/core/widget/custom_search_text_field.dart';
 import 'package:fruit_hup/features/home/presentation/views/widget/custom_home_abb_par.dart';
 
 class HomeViewBody extends StatelessWidget {
@@ -7,12 +9,28 @@ class HomeViewBody extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return const CustomScrollView(
-      slivers: [
-        SliverToBoxAdapter(
-          child: CustomHomeAppBar(),
-        )
-      ],
+    return const Padding(
+      padding: EdgeInsets.symmetric(
+        horizontal: 16,
+      ),
+      child: CustomScrollView(
+        slivers: [
+          SliverToBoxAdapter(
+            child: Column(
+              children: [
+                SizedBox(
+                  height: KTopPadding,
+                ),
+                CustomHomeAppBar(),
+                SizedBox(
+                  height: KTopPadding,
+                ),
+                SearchTextField(),
+              ],
+            ),
+          )
+        ],
+      ),
     );
   }
 }
