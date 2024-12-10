@@ -11,69 +11,72 @@ class FeaturedItem extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    var itemWidth = MediaQuery.sizeOf(context).width;
-    return SizedBox(
-        width: itemWidth * 0.5,
-        child: AspectRatio(
-          aspectRatio: 342 / 158,
-          child: Stack(
-            children: [
-              Positioned(
-                top: 0,
-                bottom: 0,
-                left: 0,
-                right: itemWidth * 0.4,
-                child: SvgPicture.asset(
-                  Assets.imagesPageViewItem2Image,
-                  fit: BoxFit.fill,
-                ),
-              ),
-              Container(
-                decoration: const BoxDecoration(
-                  image: DecorationImage(
-                    image: Svg.Svg(
-                      Assets.imagesFeaturedItemBackground,
-                    ),
+    var itemWidth = MediaQuery.sizeOf(context).width - 32;
+    return ClipRRect(
+      borderRadius: BorderRadius.circular(4),
+      child: SizedBox(
+          width: itemWidth,
+          child: AspectRatio(
+            aspectRatio: 342 / 158,
+            child: Stack(
+              children: [
+                Positioned(
+                  top: 0,
+                  bottom: 0,
+                  left: 0,
+                  right: itemWidth * 0.4,
+                  child: SvgPicture.asset(
+                    Assets.imagesPageViewItem2Image,
                     fit: BoxFit.fill,
                   ),
                 ),
-                child: Padding(
-                  padding: const EdgeInsets.only(
-                    right: 33,
+                Container(
+                  decoration: const BoxDecoration(
+                    image: DecorationImage(
+                      image: Svg.Svg(
+                        Assets.imagesFeaturedItemBackground,
+                      ),
+                      fit: BoxFit.fill,
+                    ),
                   ),
-                  child: Column(
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    children: [
-                      const SizedBox(
-                        height: 29,
-                      ),
-                      Text(
-                        'عروض العيد',
-                        style:
-                            TextStyles.regular13.copyWith(color: Colors.white),
-                      ),
-                      const Spacer(),
-                      Text(
-                        'خصم 25%',
-                        style: TextStyles.bold19.copyWith(
-                          color: Colors.white,
+                  child: Padding(
+                    padding: const EdgeInsets.only(
+                      right: 33,
+                    ),
+                    child: Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        const SizedBox(
+                          height: 29,
                         ),
-                      ),
-                      const SizedBox(
-                        height: 11,
-                      ),
-                      FeaturedItemButton(
-                        onPressed: () {},
-                      ),
-                      const SizedBox(
-                        height: 29,
-                      ),
-                    ],
+                        Text(
+                          'عروض العيد',
+                          style: TextStyles.regular13
+                              .copyWith(color: Colors.white),
+                        ),
+                        const Spacer(),
+                        Text(
+                          'خصم 25%',
+                          style: TextStyles.bold19.copyWith(
+                            color: Colors.white,
+                          ),
+                        ),
+                        const SizedBox(
+                          height: 11,
+                        ),
+                        FeaturedItemButton(
+                          onPressed: () {},
+                        ),
+                        const SizedBox(
+                          height: 29,
+                        ),
+                      ],
+                    ),
                   ),
-                ),
-              )
-            ],
-          ),
-        ));
+                )
+              ],
+            ),
+          )),
+    );
   }
 }

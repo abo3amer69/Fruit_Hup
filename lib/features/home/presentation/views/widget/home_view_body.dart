@@ -4,6 +4,7 @@ import 'package:fruit_hup/constants.dart';
 import 'package:fruit_hup/core/widget/custom_search_text_field.dart';
 import 'package:fruit_hup/features/home/presentation/views/widget/custom_home_abb_par.dart';
 import 'package:fruit_hup/features/home/presentation/views/widget/featured_item.dart';
+import 'package:fruit_hup/features/home/presentation/views/widget/featured_list.dart';
 
 class HomeViewBody extends StatelessWidget {
   const HomeViewBody({super.key});
@@ -24,13 +25,13 @@ class HomeViewBody extends StatelessWidget {
                 ),
                 CustomHomeAppBar(),
                 SizedBox(
-                  height: KTopPadding,
+                  height: 16,
                 ),
                 SearchTextField(),
                 SizedBox(
                   height: 12,
                 ),
-                FeaturedItem(),
+                FeaturedList(),
               ],
             ),
           )
