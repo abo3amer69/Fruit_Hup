@@ -22,15 +22,16 @@ class FeaturedItem extends StatelessWidget {
               children: [
                 Positioned(
                   top: 0,
-                  bottom: 0,
                   left: 0,
-                  right: itemWidth * 0.4,
+                  bottom: 0,
+                  right: itemWidth * .4,
                   child: SvgPicture.asset(
                     Assets.imagesPageViewItem2Image,
                     fit: BoxFit.fill,
                   ),
                 ),
                 Container(
+                  width: itemWidth * .5,
                   decoration: const BoxDecoration(
                     image: DecorationImage(
                       image: Svg.Svg(
@@ -47,7 +48,7 @@ class FeaturedItem extends StatelessWidget {
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
                         const SizedBox(
-                          height: 29,
+                          height: 25,
                         ),
                         Text(
                           'عروض العيد',
