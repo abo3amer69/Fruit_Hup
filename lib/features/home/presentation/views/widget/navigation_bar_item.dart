@@ -16,7 +16,10 @@ class NavigationaBarItem extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return isSelected
-        ? const ActiveItem()
+        ? ActiveItem(
+            image: buttomNavigationBarEntity.ActiveImage,
+            text: buttomNavigationBarEntity.name,
+          )
         : InActiveItem(image: buttomNavigationBarEntity.inActiveImage);
   }
 }

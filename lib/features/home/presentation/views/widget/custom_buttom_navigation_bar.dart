@@ -5,9 +5,16 @@ import 'package:fruit_hup/core/utils/app_images.dart';
 import 'package:fruit_hup/features/home/domain/entites/buttom_navigation_bar_entity.dart';
 import 'package:fruit_hup/features/home/presentation/views/widget/navigation_bar_item.dart';
 
-class CustomButtomNavigationBar extends StatelessWidget {
+class CustomButtomNavigationBar extends StatefulWidget {
   const CustomButtomNavigationBar({super.key});
 
+  @override
+  State<CustomButtomNavigationBar> createState() =>
+      _CustomButtomNavigationBarState();
+}
+
+class _CustomButtomNavigationBarState extends State<CustomButtomNavigationBar> {
+  int selectedIndex = 0;
   @override
   Widget build(BuildContext context) {
     return Container(
@@ -31,10 +38,12 @@ class CustomButtomNavigationBar extends StatelessWidget {
         ],
       ),
       child: Row(
-        children: buttomNavigationBarItem.map((e) {
+        children: buttomNavigationBarItem.asMap().entries.map((e) {
+          var index = e.key;
+          var item = e.value;
           return NavigationaBarItem(
-            buttomNavigationBarEntity: e,
-            isSelected: false,
+            isSelected: selectedIndex == index,
+            buttomNavigationBarEntity: item,
           );
         }).toList(),
       ),
