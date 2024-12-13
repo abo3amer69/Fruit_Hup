@@ -44,26 +44,29 @@ class _SplashViewBodyState extends State<SplashViewBody> {
 
   void excutenavigation() {
     bool isOnBoardingViewSeen = prefs.getBool(KisOnBoardingViewSeen);
-    Future.delayed(const Duration(seconds: 3), () {
-      if (isOnBoardingViewSeen) {
-        var isLoggedIn = FirebaseAuthServices().isLoggedIn();
-        if (isLoggedIn) {
-          Navigator.pushReplacementNamed(
-            context,
-            HomeView.routeName,
-          );
+    Future.delayed(
+      const Duration(seconds: 3),
+      () {
+        if (isOnBoardingViewSeen) {
+          var isLoggedIn = FirebaseAuthServices().isLoggedIn();
+          if (isLoggedIn) {
+            Navigator.pushReplacementNamed(
+              context,
+              HomeView.routeName,
+            );
+          } else {
+            Navigator.pushReplacementNamed(
+              context,
+              SignView.routeName,
+            );
+          }
         } else {
           Navigator.pushReplacementNamed(
             context,
-            SignView.routeName,
+            OnBoardingView.routeName,
           );
         }
-      } else {
-        Navigator.pushReplacementNamed(
-          context,
-          OnBoardingView.routeName,
-        );
-      }
-    });
+      },
+    );
   }
 }
