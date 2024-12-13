@@ -44,19 +44,23 @@ class FirebaseAuthServices {
   Future<User> signInWithEmailAndPassword(
       {required String email, required String password}) async {
     try {
+      print("Received email: $email");
+      print("Received password: $password");
       final credential = await FirebaseAuth.instance.signInWithEmailAndPassword(
         email: email,
         password: password,
       );
+      print("Credential email: ${email}");
+      print("Credential password: ${password}");
       return credential.user!;
     } on FirebaseAuthException catch (e) {
       log("Exception in firebaseAuthServices.signInWithEmailAndPassword: ${e.toString()}and code is ${e.code}");
       if (e.code == 'user-not-found') {
         throw CustomException(
-            message: 'الرقم السري او البريد الالكتروني غير صحيح.');
+            message: 'kkkkkالرقم السري او البريد الالكتروني غير صحيح.');
       } else if (e.code == 'wrong-password') {
         throw CustomException(
-            message: 'الرقم السري او البريد الالكتروني غير صحيح.');
+            message: '  ffffالرقم السري او البريد الالكتروني غير صحيح.');
       } else if (e.code == 'invalid-credential') {
         throw CustomException(
             message: 'احمد البريد الالكتروني او الرقم السري غير صحيح');

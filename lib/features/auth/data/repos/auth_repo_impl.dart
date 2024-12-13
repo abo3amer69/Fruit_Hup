@@ -63,6 +63,7 @@ class AuthRepoImpl extends AuthRepo {
       var user = await firebaseAuthServices.signInWithEmailAndPassword(
           email: email, password: password);
       var userEntity = await getUserData(uId: user.uid);
+      await saveUserData(user: userEntity);
       return Right(
         userEntity,
       );
@@ -93,6 +94,7 @@ class AuthRepoImpl extends AuthRepo {
       } else {
         await addUserData(user: UserEntity);
       }
+
       return Right(UserEntity);
     } catch (e) {
       await deletUser(user);
@@ -150,15 +152,6 @@ class AuthRepoImpl extends AuthRepo {
   }
 
   @override
-  Future addUserData({required UserEntity user}) async {
-    await databaseServices.addData(
-      path: BackendEndpoint.addUserData,
-      data: UserModel.fromEntity(user).toMap(),
-      //documentId: user.uId,
-    );
-  }
-
-  @override
   Future<UserEntity> getUserData({required String uId}) async {
     var userData = await databaseServices.getData(
         path: BackendEndpoint.getUserData, documentId: uId);
@@ -166,10 +159,17 @@ class AuthRepoImpl extends AuthRepo {
   }
 
   @override
-  Future saveUserData({required UserEntity user}) async {
-    var jsonData = jsonDecode(
-      UserModel.fromEntity(user).toMap(),
+  Future addUserData({required UserEntity user}) async {
+    await databaseServices.addData(
+      path: BackendEndpoint.addUserData,
+      data: UserModel.fromEntity(user).toMap(),
+      documentId: user.uId,
     );
+  }
+
+  @override
+  Future saveUserData({required UserEntity user}) async {
+    var jsonData = jsonEncode(UserModel.fromEntity(user).toMap());
     await prefs.setString(KuserData, jsonData);
   }
 }
